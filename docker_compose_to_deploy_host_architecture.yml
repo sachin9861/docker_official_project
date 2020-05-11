@@ -1,18 +1,6 @@
-version: '3'
+version: '2'
 services:
-  ghostdatabase:main_ghost_database
-      image: mysql:5.7
-      volumes:
-        - db_storage_new:/var/lib/mysql
-      restart: always
-      environment:
-        MYSQL_ROOT_PASSWORD: redhat
-        MYSQL_USER: sachin
-        MYSQL_PASSWORD: redhat
-        MYSQL_DATABASE: main_docker_database
-
-
-  ghostos:
+    ghostos:
       image: ghost
       restart: always
       depends_on:
@@ -27,6 +15,17 @@ services:
         database_connection_user: sachin
         database_connection_password: redhat
         database_connection_database: main_docker_database
+        
+    ghostdatabase:main_ghost_database:
+                      image: mysql
+                      volumes:
+                        - db_storage_new:/var/lib/mysql
+                      restart: always
+                      environment:
+                        MYSQL_ROOT_PASSWORD: redhat
+                        MYSQL_USER: sachin
+                        MYSQL_PASSWORD: redhat
+                        MYSQL_DATABASE: main_docker_database
 volumes:
   main_database:
   main_ghost_storage:
